@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .routers import books
+from .routers import books, auth
 
 
 app = FastAPI()
@@ -9,7 +9,9 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
-    "localhost:3000"
+    "localhost:3000",
+    "http://127.0.0.1:5500",
+    "127.0.0.1:5500"
 ]
 
 app.add_middleware(
@@ -21,6 +23,7 @@ app.add_middleware(
 )
 
 app.include_router(books.router, prefix="/api")
+app.include_router(auth.router, prefix="/api")
 
 
 
